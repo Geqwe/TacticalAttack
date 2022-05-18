@@ -1602,8 +1602,8 @@ MonoBehaviour:
   _maxHealth: 100
   _movementRadius: 7
   _attackRadius: 2
-  _attackDamage: 30
-  _extraEffectiveDamage: 10
+  _attackDamage: 35
+  _extraEffectiveDamage: 15
   _troopType: 1
   _counterTroopType: 2
   Animator: {fileID: 0}
@@ -1675,6 +1675,7 @@ MonoBehaviour:
   - {fileID: 8527214590341253410}
   _movementCircleColor: {r: 0.21626917, g: 0.26752332, b: 0.5660378, a: 0}
   _attackCircleColor: {r: 0.6415094, g: 0.23300104, b: 0.23300104, a: 0}
+  _circleWidth: 0.1
 --- !u!1 &2166774053411391603
 GameObject:
   m_ObjectHideFlags: 0
