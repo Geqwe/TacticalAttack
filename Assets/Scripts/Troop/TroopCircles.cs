@@ -7,6 +7,7 @@ namespace Troop {
         private TroopStats _troopStats;
         [SerializeField] private LineRenderer[] _lineRenderers;
         [SerializeField] private Color _movementCircleColor, _attackCircleColor;
+        [SerializeField] private float _circleWidth = 0.1f;
         private int _segments = 200;
 
         void Start()
@@ -26,8 +27,8 @@ namespace Troop {
 
             lineRenderer.startColor = color; 
             lineRenderer.endColor = color;
-            lineRenderer.startWidth = 0.1f;
-            lineRenderer.endWidth = 0.1f;
+            lineRenderer.startWidth = _circleWidth;
+            lineRenderer.endWidth = _circleWidth;
             lineRenderer.positionCount = _segments+1;
             lineRenderer.useWorldSpace = false;
 

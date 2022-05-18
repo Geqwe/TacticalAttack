@@ -15,11 +15,6 @@ namespace Battle {
         private int _numOfPlayerTroops, _numOfEnemyTroops;
         public bool PlayersTurn;
 
-        void Start()
-        {
-            
-        }
-
         public void RollInitiative() {
             _rollInitiativeButton.SetActive(false);
 
@@ -112,7 +107,6 @@ namespace Battle {
         }
 
         private void PrintTroopsPlaying() {
-            Debug.Log("troops playing count "+_troopsPlaying.Count);
             for(int i=0;i<_troopsPlaying.Count;++i) {
                 Debug.Log(_troopsPlaying[i].name);
             }

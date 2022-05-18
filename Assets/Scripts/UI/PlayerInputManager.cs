@@ -16,7 +16,7 @@ public class PlayerInputManager : MonoBehaviour
     {
         _battleController = FindObjectOfType<BattleContoller>();
         _cam = Camera.main;
-        _cursorOffset = new Vector2(cursorTextureAttack.width/4, cursorTextureAttack.height/4);
+        _cursorOffset = new Vector2(cursorTextureAttack.width/4, cursorTextureAttack.height/5);
     }
 
     void Update()
@@ -57,6 +57,5 @@ public class PlayerInputManager : MonoBehaviour
         _moveIndicator.SetActive(true);
         yield return new WaitForSeconds(2f);
         _moveIndicator.SetActive(false);
-
     }
 }

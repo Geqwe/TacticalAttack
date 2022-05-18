@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace Troop.Enemy.StateMachine {
     public class MoveTowardsState : IState

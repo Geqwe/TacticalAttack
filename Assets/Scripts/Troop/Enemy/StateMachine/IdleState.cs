@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace Troop.Enemy.StateMachine {
     public class IdleState : IState
     {

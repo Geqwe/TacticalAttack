@@ -16,7 +16,7 @@ namespace Troop {
         [SerializeField] protected Image _healthBar;
         public bool IsDead;
         
-
+        #region Properties
         [SerializeField] private float _maxHealth;
         private float _health;
         public float Health {
@@ -54,6 +54,7 @@ namespace Troop {
         [SerializeField] private TroopType _troopType;
         public TroopType TroopType => _troopType;
         [SerializeField] private TroopType _counterTroopType;
+        #endregion
 
         public Animator Animator;
         private  NavMeshAgent _agent;
@@ -70,13 +71,17 @@ namespace Troop {
 
         public void TakeDamage(TroopStats attacker) {
             float amount = attacker.AttackDamage;
+
             if(attacker.TroopType == _counterTroopType) {
                 amount += ExtraEffectiveDamage;
             }
+
             Health -= amount;
+
             LeanTween.scale(_healthBar.gameObject, Vector3.one*1.2f, 0.5f).setEasePunch();
             _damageText.text = "-"+amount;
             StartCoroutine(ShowDamageText());
+            
             if(Health<=0f) {
                 Health = 0f;
                 if(!IsDead) {

@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace Troop.Enemy.StateMachine {
     public class AttackState : IState
     {
