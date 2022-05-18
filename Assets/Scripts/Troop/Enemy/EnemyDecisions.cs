@@ -46,6 +46,7 @@ namespace Troop.Enemy
             base.StartTurn();
             ShouldEndTurn = false;
             Agent.isStopped = false;
+            Agent.SetDestination(transform.position);
             yield return new WaitForSeconds(1f);
             _myTurn = true;
         }
