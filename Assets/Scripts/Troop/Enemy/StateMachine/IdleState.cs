@@ -6,13 +6,11 @@ namespace Troop.Enemy.StateMachine {
     public class IdleState : IState
     {
         public IState DoState(EnemyDecisions enemyDecisions) {
-
-            //check for enemies in attack range -> attack
+            // Debug.Log("IDLE");
             if(enemyDecisions.EnemyInAttackRange()) {
                 return enemyDecisions.AttackState;
             }
 
-            //check for enemies in movement range -> move towards them
             if(enemyDecisions.EnemyInMovementRange()) {
                 return enemyDecisions.MoveTowardsPlayerState;
             }

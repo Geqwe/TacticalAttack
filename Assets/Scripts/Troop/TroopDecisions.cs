@@ -9,7 +9,6 @@ namespace Troop {
     [RequireComponent(typeof(NavMeshAgent))]
     public abstract class TroopDecisions : MonoBehaviour
     {
-        // [SerializeField] private GameObject _selectionCircle;
         [SerializeField] private GameObject _movementRangeCircle;
         [SerializeField] private GameObject _attackRangeCircle;
         protected BattleContoller _battleController;
@@ -19,13 +18,12 @@ namespace Troop {
         }
 
         public virtual void StartTurn() {
-            // _selectionCircle.SetActive(true);
             ShowMovementReach(true);
             ShowAttackReach(true);
+            GenericAudioManager.Instance.PlaySfx("ChangeTurn");
         }
 
         public virtual void EndTurn() {
-            // _selectionCircle.SetActive(false);
             InGameNotificationManager.Instance.UpdateText("");
             ShowMovementReach(false);
             ShowAttackReach(false);

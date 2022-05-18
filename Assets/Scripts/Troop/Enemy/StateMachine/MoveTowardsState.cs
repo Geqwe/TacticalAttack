@@ -9,15 +9,17 @@ namespace Troop.Enemy.StateMachine {
         private Vector3 _previousLocation;
 
         public IState DoState(EnemyDecisions enemyDecisions) {
+            // Debug.Log("MOVE between "+_movingTowardsInBetween+" player "+_movingTowardsPlayer+" should end turn "+enemyDecisions.ShouldEndTurn);
 
             DoMoveTowardsPlayer(enemyDecisions);
 
             if(enemyDecisions.ShouldEndTurn) {
+                _movingTowardsInBetween = false;
+                _movingTowardsPlayer = false;
                 enemyDecisions.EndTurn();
                 return enemyDecisions.IdleState;
             }
 
-            //check for enemies in attack range -> attack
             if(enemyDecisions.EnemyInAttackRange()) {
                 _movingTowardsInBetween = false;
                 _movingTowardsPlayer = false;
@@ -31,7 +33,7 @@ namespace Troop.Enemy.StateMachine {
 
         private void DoMoveTowardsPlayer(EnemyDecisions enemyDecisions) {
             if(_movingTowardsPlayer) {
-                if(enemyDecisions.Agent.remainingDistance <= enemyDecisions.TroopStats.AttackRadius) {
+                if(Vector3.Distance(enemyDecisions.transform.position, enemyDecisions.EnemyTarget.position) <= enemyDecisions.TroopStats.AttackRadius) {
                     enemyDecisions.Agent.isStopped = true;
                     _movingTowardsPlayer = false;
                 }
@@ -57,7 +59,8 @@ namespace Troop.Enemy.StateMachine {
                 _distanceLeft = enemyDecisions.TroopStats.MovementRadius;
                 _movingTowardsInBetween = true;
             }
-            enemyDecisions.Agent.SetDestination(enemyDecisions.EnemyTarget.position);
+            if(enemyDecisions.EnemyTarget!=null)
+                enemyDecisions.Agent.SetDestination(enemyDecisions.EnemyTarget.position);
         }
     }
 }

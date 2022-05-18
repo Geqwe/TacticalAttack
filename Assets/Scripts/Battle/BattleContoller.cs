@@ -9,6 +9,7 @@ namespace Battle {
     {
         private List<TroopStats> _troopsPlaying;
         [SerializeField] private GameObject _rollInitiativeButton, _endTurnButton;
+        [SerializeField] private GameObject _winScreen, _loseScreen;
         private int _troopTurnIndex = -1;
 
         private int _numOfPlayerTroops, _numOfEnemyTroops;
@@ -43,11 +44,20 @@ namespace Battle {
         }
 
         private void GiveNextTurn() {
-            if(_troopTurnIndex == _troopsPlaying.Count-1) {
-                _troopTurnIndex = 0;
-            }
-            else {
-                ++_troopTurnIndex;
+            if(_troopsPlaying.Count==1)
+                return;
+
+            while(true) {
+                if(_troopTurnIndex == _troopsPlaying.Count-1) {
+                    _troopTurnIndex = 0;
+                }
+                else {
+                    ++_troopTurnIndex;
+                }
+
+                if(!_troopsPlaying[_troopTurnIndex].IsDead) {
+                    break;
+                }
             }
 
             CheckIfEndTurnButtonIsNeeded();
@@ -101,12 +111,19 @@ namespace Battle {
             }
         }
 
-        private void PlayerLost() {
+        private void PrintTroopsPlaying() {
+            Debug.Log("troops playing count "+_troopsPlaying.Count);
+            for(int i=0;i<_troopsPlaying.Count;++i) {
+                Debug.Log(_troopsPlaying[i].name);
+            }
+        }
 
+        private void PlayerLost() {
+            _loseScreen.SetActive(true);
         }
 
         private void PlayerWon() {
-
+            _winScreen.SetActive(true);
         }
     }
 }

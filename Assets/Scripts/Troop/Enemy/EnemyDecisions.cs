@@ -39,9 +39,14 @@ namespace Troop.Enemy
 
         public override void StartTurn()
         {
+            StartCoroutine(WaitToStartTurn());
+        }
+
+        private IEnumerator WaitToStartTurn() {
             base.StartTurn();
             ShouldEndTurn = false;
-            _currentState = IdleState;
+            Agent.isStopped = false;
+            yield return new WaitForSeconds(1f);
             _myTurn = true;
         }
 
@@ -49,6 +54,7 @@ namespace Troop.Enemy
         {
             _currentState = IdleState;
             _myTurn = false;
+            EnemyTarget = null;
             base.EndTurn();
             _battleController.EndTurn();
         }
@@ -86,7 +92,7 @@ namespace Troop.Enemy
             return false;
         }
 
-        public bool EnemyInMovementRange() {
+        public bool EnemyInMovementRange() { // can do with overlap sphere 
             PlayerTroopDecisions[] playerTroops = FindObjectsOfType<PlayerTroopDecisions>();
 
             foreach(PlayerTroopDecisions playerTroop in playerTroops) {
@@ -97,6 +103,17 @@ namespace Troop.Enemy
             }
 
             return false;
+        }
+
+        public void WaitForAttackAnimation() {
+            _myTurn = false;
+            StartCoroutine(WaitForAttackAnimationCor());
+        }
+
+        private IEnumerator WaitForAttackAnimationCor() {
+            yield return new WaitForSeconds(2f);
+            GenericAudioManager.Instance.PlaySfx("Slash");
+            EndTurn();
         }
     }
 }

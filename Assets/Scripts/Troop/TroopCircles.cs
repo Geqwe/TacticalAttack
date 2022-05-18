@@ -16,6 +16,10 @@ namespace Troop {
             CreateCircle(_lineRenderers[1], _troopStats.AttackRadius, _attackCircleColor);
         }
 
+        public void CreateMovementCircleWithNewRadius(float radius) {
+            CreateCircle(_lineRenderers[0], radius, _movementCircleColor);
+        }
+
         private void CreateCircle(LineRenderer lineRenderer, float radius, Color color) {
             float x;
             float y;
